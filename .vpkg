@@ -8,23 +8,27 @@ name() {
 }
 
 version() {
-  echo "stable"
+  echo "0.0.3"
 }
 
 repository() {
   echo "https://github.com/jessetane/cpu"
 }
 
-build() {
-  
-  # get source
-  [ ! -d "$src"/.git ] && git clone "$(repository)" "$src"
-  
-  # checkout code
+dependencies() {
+  echo "argue 0.0.4"
+}
+
+fetch() {
+  git clone "$(repository)" "$src"
+}
+
+update() {
   git fetch --all
   git fetch --tags
-  
-  # install
+}
+
+build() {
   mkdir -p "$lib"/"$build"
   cd "$lib"/"$build"
   cp -R "$src"/.git ./
