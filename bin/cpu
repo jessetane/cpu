@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+# cpu
+#
+
+cpu() {
+  
+  # deps
+  . libargue.sh
+  
+  # args/opts
+  args=("$@")
+  argue || return 1
+  cmd="${args[0]}"
+  
+  # proxy to cmd
+  case "$cmd" in
+    "count" ) cpu_count;;
+    * ) cpu_usage;;
+  esac
+}
+
+cpu_version() {
+  echo "0.0.1"
+}
+
+cpu_usage() {
+  echo "usage: cpu <command>"
+}
+
+cpu_count() {
+  local os="$(uname)"
+  case "$os" in
+    "Darwin" ) sysctl -n hw.ncpu;;
+    "Linux" ) cat /proc/cpuinfo | grep processor | wc -l;;
+    * ) echo "$os: unknown platform" && exit 1;;
+  esac
+}
+
+# go
+cpu "$@"
