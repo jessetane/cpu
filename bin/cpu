@@ -6,22 +6,34 @@
 cpu() {
   
   # deps
-  . libargue.sh || return 1
+  spm include argue 0.0.4 || return 1
   
   # args/opts
   args=("$@")
-  argue || return 1
-  cmd="${args[0]}"
+  cmd="$1" && shift
   
   # proxy to cmd
   case "$cmd" in
-    "count" ) cpu_count;;
-    * ) cpu_usage;;
+    "count" ) cpu_count "$@";;
+    * )
+      
+      # parse options
+      argue "-v, --version"\
+            "-h, --help" || return 1
+
+      # if we have $cmd and no options
+      if [ -n "$cmd" ] && [ "${#opts[@]}" = 0 ]; then
+        echo "$cmd: command not found" >&2 && return 1
+      elif [ -n "${opts[0]}" ]; then
+        cpu_version
+      else
+        cpu_usage
+      fi
   esac
 }
 
 cpu_version() {
-  echo "0.0.3"
+  echo "0.0.4"
 }
 
 cpu_usage() {
@@ -29,7 +41,7 @@ cpu_usage() {
 }
 
 cpu_count() {
-  local os="$(uname)"
+  os="$(uname)"
   case "$os" in
     "Darwin" ) sysctl -n hw.ncpu;;
     "Linux" ) cat /proc/cpuinfo | grep processor | wc -l;;

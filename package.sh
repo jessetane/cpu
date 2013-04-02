@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# .vpkg
+# package.sh for cpu
 #
 
 name() {
@@ -8,7 +8,7 @@ name() {
 }
 
 version() {
-  echo "0.0.3"
+  echo "0.0.4"
 }
 
 repository() {
@@ -16,7 +16,7 @@ repository() {
 }
 
 dependencies() {
-  echo "argue 0.0.4"
+  echo "argue 0.0.5"
 }
 
 fetch() {
