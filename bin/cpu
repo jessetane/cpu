@@ -6,7 +6,7 @@
 cpu() {
   
   # deps
-  spm include argue 0.0.5 || return 1
+  vpkg include argue 0.0.5 || return 1
   
   # args/opts
   args=("$@")

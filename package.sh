@@ -20,7 +20,7 @@ dependencies() {
 }
 
 fetch() {
-  git clone "$(repository)" "$src"
+  git clone "$(repository)" "$SRC"
 }
 
 update() {
@@ -29,8 +29,7 @@ update() {
 }
 
 build() {
-  mkdir -p "$lib"/"$build"
-  cd "$lib"/"$build"
-  cp -R "$src"/.git ./
-  git reset --hard "$version"
+  mkdir -p "$LIB"
+  cp -R "$SRC"/.git "$LIB"/
+  cd "$LIB" && git reset --hard "$VERSION"
 }
