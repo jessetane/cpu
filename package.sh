@@ -12,7 +12,8 @@ version() {
 }
 
 repository() {
-  echo "https://github.com/jessetane/cpu"
+  #echo "https://github.com/jessetane/cpu"
+  echo "file:///Users/jessetane/Dropbox/software/src/cpu"
 }
 
 dependencies() {

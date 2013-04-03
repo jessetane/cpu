@@ -6,7 +6,7 @@
 cpu() {
   
   # deps
-  vpkg include argue 0.0.5 || return 1
+  vpkg load argue 0.0.5 && . libargue.sh || return 1
   
   # args/opts
   args=("$@")
