@@ -12,8 +12,7 @@ version() {
 }
 
 repository() {
-  #echo "https://github.com/jessetane/cpu"
-  echo "file:///Users/jessetane/Dropbox/software/src/cpu"
+  echo "https://github.com/jessetane/cpu"
 }
 
 dependencies() {
@@ -25,12 +24,14 @@ fetch() {
 }
 
 update() {
+  cd "$SRC"
   git fetch --all
   git fetch --tags
 }
 
 build() {
   mkdir -p "$LIB"
-  cp -R "$SRC"/.git "$LIB"/
-  cd "$LIB" && git reset --hard "$VERSION"
+  cp -R "$SRC"/.git "$LIB"
+  cd "$LIB"
+  git reset --hard "$VERSION"
 }
